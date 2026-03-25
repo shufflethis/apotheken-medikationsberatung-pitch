@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLAUDER PUDEL × medikationsberatung.ai — Der Pitch</title>
+    <meta name="description" content="KI-gestützte Datenstrukturierung für Pharma for You. Die Apotheke 2.0 Revolution.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --teal-50: #F0FDFA;
+            --teal-100: #CCFBF1;
+            --teal-200: #99F6E4;
+            --teal-400: #2DD4BF;
+            --teal-500: #14B8A6;
+            --teal-600: #0D9488;
+            --teal-700: #0F766E;
+            --teal-900: #134E4A;
+            --danger: #EF4444;
+            --danger-glow: rgba(239, 68, 68, 0.4);
+            --warning: #F59E0B;
+            --bg-dark: #0A0E17;
+            --bg-card: rgba(15, 23, 42, 0.8);
+            --bg-card-hover: rgba(20, 30, 55, 0.9);
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y proximity;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Grid overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        section {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 24px;
+            scroll-snap-align: start;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; width: 100%; }
+
+        /* ---- NAV ---- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 16px 24px;
+        }
+        nav .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+        .logo-icon {
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg, var(--teal-600), var(--teal-400));
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+        }
+        .logo span { color: var(--teal-400); }
+        .nav-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.05);
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        /* ---- HERO ---- */
+        #hero {
+            min-height: 100vh;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(13, 148, 136, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: var(--danger);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.1); }
+            50% { box-shadow: 0 0 40px rgba(239, 68, 68, 0.3); }
+        }
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 24px;
+            letter-spacing: -3px;
+        }
+        .hero-title .gradient {
+            background: linear-gradient(135deg, var(--teal-400), var(--teal-600), #818CF8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-title .danger {
+            background: linear-gradient(135deg, var(--danger), #F97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 48px;
+            line-height: 1.6;
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+        .hero-stat {
+            text-align: center;
+        }
+        .hero-stat .number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--danger);
+            text-shadow: 0 0 30px var(--danger-glow);
+        }
+        .hero-stat .label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ---- PAIN SECTION ---- */
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--teal-400);
+            margin-bottom: 16px;
+        }
+        .section-label::before {
+            content: '';
+            width: 24px;
+            height: 2px;
+            background: var(--teal-400);
+        }
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+        .section-desc {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            max-width: 650px;
+        }
+
+        /* Pain Cards */
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 48px;
+        }
+        .pain-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .pain-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--danger), transparent);
+        }
+        .pain-card:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+            border-color: rgba(239, 68, 68, 0.2);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .pain-card .icon {
+            width: 48px; height: 48px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--danger);
+            font-size: 24px;
+        }
+        .pain-card h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .pain-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .pain-card .stat {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--danger);
+            margin-top: 16px;
+            display: block;
+        }
+
+        /* ---- INSIGHT SECTION (Meeting Intel) ---- */
+        .insight-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 48px;
+        }
+        @media (max-width: 768px) {
+            .insight-grid { grid-template-columns: 1fr; }
+        }
+        .insight-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.4s ease;
+        }
+        .insight-card:hover {
+            border-color: rgba(13, 148, 136, 0.3);
+            box-shadow: 0 0 40px rgba(13, 148, 136, 0.08);
+        }
+        .insight-card.full { grid-column: 1 / -1; }
+        .insight-card .tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 4px 12px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+        .tag-secret { background: rgba(139, 92, 246, 0.15); color: #A78BFA; }
+        .tag-data { background: rgba(13, 148, 136, 0.15); color: var(--teal-400); }
+        .tag-target { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+        .tag-tech { background: rgba(59, 130, 246, 0.15); color: #60A5FA; }
+        .insight-card h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .insight-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .insight-card ul {
+            list-style: none;
+            margin-top: 16px;
+        }
+        .insight-card ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .insight-card ul li .material-icons {
+            font-size: 16px;
+            color: var(--teal-400);
+        }
+
+        /* ---- SOLUTION / PUDEL SECTION ---- */
+        .pudel-hero {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        .pudel-name {
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, var(--teal-400), #818CF8, var(--teal-600));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+        .pudel-tagline {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+        }
+        .pudel-tagline strong {
+            color: var(--teal-400);
+        }
+
+        /* Three pillars */
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        @media (max-width: 900px) {
+            .pillar-grid { grid-template-columns: 1fr; }
+        }
+        .pillar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .pillar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--teal-400), var(--teal-600));
+        }
+        .pillar:hover {
+            transform: translateY(-6px);
+            border-color: rgba(13, 148, 136, 0.3);
+            box-shadow: 0 20px 60px rgba(13, 148, 136, 0.1);
+        }
+        .pillar .step {
+            width: 56px; height: 56px;
+            background: linear-gradient(135deg, var(--teal-600), var(--teal-400));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 24px;
+            font-weight: 800;
+        }
+        .pillar h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .pillar p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ---- FUNNEL SECTION ---- */
+        .funnel-steps {
+            max-width: 700px;
+            margin: 48px auto 0;
+        }
+        .funnel-step {
+            display: flex;
+            gap: 24px;
+            padding: 32px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            margin-bottom: 16px;
+            transition: all 0.4s ease;
+            align-items: center;
+        }
+        .funnel-step:hover {
+            border-color: rgba(13, 148, 136, 0.3);
+            transform: translateX(8px);
+        }
+        .funnel-step .num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--teal-400);
+            min-width: 60px;
+            opacity: 0.3;
+        }
+        .funnel-step:hover .num { opacity: 1; }
+        .funnel-step h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .funnel-step p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .funnel-step .revenue {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            color: var(--teal-400);
+            font-size: 1rem;
+            margin-top: 4px;
+        }
+
+        /* ---- TURNAROUND TIMELINE ---- */
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 48px;
+        }
+        @media (max-width: 900px) {
+            .timeline { grid-template-columns: 1fr 1fr; }
+        }
+        .timeline-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 28px;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        .timeline-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(13, 148, 136, 0.3);
+        }
+        .timeline-card .phase {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--teal-400);
+            margin-bottom: 12px;
+        }
+        .timeline-card h4 {
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .timeline-card ul {
+            list-style: none;
+        }
+        .timeline-card ul li {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .timeline-card ul li::before {
+            content: '→';
+            color: var(--teal-400);
+            font-weight: 700;
+        }
+        .timeline-card.danger { border-color: rgba(239, 68, 68, 0.2); }
+        .timeline-card.danger .phase { color: var(--danger); }
+
+        /* ---- CTA SECTION ---- */
+        #cta {
+            text-align: center;
+        }
+        .cta-box {
+            background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(129, 140, 248, 0.1));
+            border: 1px solid rgba(13, 148, 136, 0.2);
+            border-radius: 24px;
+            padding: 64px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(13, 148, 136, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .cta-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+        .cta-desc {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--teal-600), var(--teal-500));
+            color: white;
+            font-size: 1.15rem;
+            font-weight: 700;
+            padding: 18px 40px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(13, 148, 136, 0.3);
+        }
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 48px rgba(13, 148, 136, 0.5);
+        }
+        .cta-meta {
+            margin-top: 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ---- FOOTER ---- */
+        footer {
+            text-align: center;
+            padding: 40px 24px;
+            border-top: 1px solid var(--border-subtle);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---- ANIMATIONS ---- */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Counter animation */
+        .counter { display: inline-block; }
+
+        /* Comparison split */
+        .compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 48px;
+        }
+        @media (max-width: 768px) {
+            .compare { grid-template-columns: 1fr; }
+        }
+        .compare-card {
+            border-radius: 16px;
+            padding: 40px 32px;
+            text-align: center;
+        }
+        .compare-card.old {
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        .compare-card.new {
+            background: rgba(13, 148, 136, 0.05);
+            border: 1px solid rgba(13, 148, 136, 0.2);
+        }
+        .compare-card .emoji { font-size: 3rem; margin-bottom: 16px; display: block; }
+        .compare-card h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .compare-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        .compare-card.old h4 { color: var(--danger); }
+        .compare-card.new h4 { color: var(--teal-400); }
+
+        /* Scroll indicator */
+        .scroll-hint {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s ease-in-out infinite;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-align: center;
+        }
+        .scroll-hint .material-icons { display: block; margin-top: 4px; }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Horizontal rule with glow */
+        .glow-divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--teal-400), transparent);
+            margin: 32px auto;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="inner">
+        <div class="logo">
+            <div class="logo-icon">
+                <span class="material-icons" style="font-size:20px; color:white">local_pharmacy</span>
+            </div>
+            PLAUDER PUDEL <span>× medikationsberatung.ai</span>
+        </div>
+        <div class="nav-date">PITCH // 31.03.2026</div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="container">
+        <div class="hero-badge">
+            <span class="material-icons" style="font-size:14px">warning</span>
+            APOTHEKENSTERBEN — DIE KRISE IST JETZT
+        </div>
+        <h1 class="hero-title fade-up">
+            <span class="danger">17.041</span><br>
+            <span class="gradient">Apotheken.</span>
+        </h1>
+        <p class="hero-subtitle fade-up">
+            Historischer Tiefstand. Jeden Tag 2 Schließungen.<br>
+            <strong style="color: var(--teal-400)">KI-Revolution als einziger Ausweg.</strong>
+        </p>
+        <div class="hero-stats fade-up">
+            <div class="hero-stat">
+                <div class="number" data-target="70">0</div>
+                <div class="label">% Arbeitszeit für Admin</div>
+            </div>
+            <div class="hero-stat">
+                <div class="number" data-target="76">0</div>
+                <div class="label">% Personalkostensteigerung</div>
+            </div>
+            <div class="hero-stat">
+                <div class="number" data-target="43">0</div>
+                <div class="label">% inadäquate Medikation</div>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            Scroll
+            <span class="material-icons">keyboard_arrow_down</span>
+        </div>
+    </div>
+</section>
+
+<!-- PAIN -->
+<section id="pain">
+    <div class="container">
+        <div class="section-label">Der Pain</div>
+        <h2 class="section-title fade-up">Apotheker werden zu<br>Verwaltungsassistenten <span style="color: var(--danger)">degradiert.</span></h2>
+        <p class="section-desc fade-up">Die pharmazeutische Expertise verkümmert im Alltagschaos. Online-Apotheken fressen den Markt. Die demografische Zeitbombe tickt.</p>
+
+        <div class="pain-grid">
+            <div class="pain-card fade-up">
+                <div class="icon"><span class="material-icons">schedule</span></div>
+                <h4>Bürokratie-Wahnsinn</h4>
+                <p>39.500 verschiedene Rabattverträge. 18,65 Mio. Datensätze. 4,2% der Gesundheitsausgaben für Admin vs. 1,9% für Apothekendienste.</p>
+                <span class="stat">70% Zeitverlust</span>
+            </div>
+            <div class="pain-card fade-up">
+                <div class="icon"><span class="material-icons">trending_down</span></div>
+                <h4>Online frisst den Markt</h4>
+                <p>Shop Apotheke: 2,4 Mrd. € Umsatz 2024. +32% Wachstum. 35,48% Marktpenetration bis 2027 prognostiziert.</p>
+                <span class="stat">+10,26%/Jahr</span>
+            </div>
+            <div class="pain-card fade-up">
+                <div class="icon"><span class="material-icons">elderly</span></div>
+                <h4>Demografische Zeitbombe</h4>
+                <p>Höchste Polymedikation Europas. 58,3% nehmen 5–9 Medikamente. 28,5% nehmen 10+ Medikamente. Beratungsbedarf explodiert.</p>
+                <span class="stat">1 Mio. vermeidbare Klinikeinweisungen</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STRATEGIC INSIGHTS (Meeting Intel) -->
+<section id="insight">
+    <div class="container">
+        <div class="section-label">Unsere Erkenntnis</div>
+        <h2 class="section-title fade-up">Was die Branche <span style="color: var(--teal-400)">nicht sieht.</span></h2>
+        <p class="section-desc fade-up">Die wahren Wettbewerbsvorteile liegen nicht in der medizinischen Analyse — sondern in der Datenstrukturierung, der Zielgruppe und dem Funnel.</p>
+
+        <div class="insight-grid">
+            <div class="insight-card fade-up">
+                <span class="tag tag-target">Zielgruppen-Shift</span>
+                <h4>Die wahre Zielgruppe sind die Enkel.</h4>
+                <p>Nicht die Apotheken brauchen eine Medikationsanalyse — es sind die <strong style="color: var(--teal-400)">Enkel, die Omas und Opas begleiten</strong>. Wer die echte Zielgruppe kennt, beherrscht die Akquise.</p>
+            </div>
+            <div class="insight-card fade-up">
+                <span class="tag tag-data">Core Business</span>
+                <h4>Sichere Datenstrukturierung — nicht Medizinprodukt.</h4>
+                <p>Unser Kern ist nicht die medizinische Analyse. Wir strukturieren Daten so, dass <strong style="color: var(--teal-400)">Pharma for You direkt andocken kann</strong>. Das Brownback-Modell liefert in 48h die Ergebnisse im benötigten Format.</p>
+            </div>
+            <div class="insight-card fade-up">
+                <span class="tag tag-secret">Lead-Engine</span>
+                <h4>Geo-optimiertes Lead-Modell.</h4>
+                <p>Regionale KI-gesteuerte Lead-Strategie. Die Kunden finden die lokale Apotheke — nicht umgekehrt. Funnels, die Apotheken bisher nicht kennen.</p>
+            </div>
+            <div class="insight-card fade-up">
+                <span class="tag tag-tech">Lokale KI</span>
+                <h4>DSGVO-konforme KI auf lokaler Hardware.</h4>
+                <p>Lokales Large Language Model, auf das nur die Apotheke Zugriff hat. Server in Deutschland. Bis Ende 2026 laufen leistungsfähige Modelle auf 1.000€-Hardware.</p>
+            </div>
+            <div class="insight-card full fade-up">
+                <span class="tag tag-data">Dreifacher Mehrwert</span>
+                <h4>Was wir ins Spiel bringen:</h4>
+                <ul>
+                    <li><span class="material-icons">check_circle</span> Fertiges Brownback-Modell — 15-Fragen-Prompt liefert strukturierte Daten für Pharma for You</li>
+                    <li><span class="material-icons">check_circle</span> Lead-Generierung — Geo-optimiert, KI-gesteuert, regionale Kundenakquise</li>
+                    <li><span class="material-icons">check_circle</span> Lokale DSGVO-konforme KI — kundengerechte, pharmazeutisch korrekte Aufbereitung</li>
+                    <li><span class="material-icons">check_circle</span> Transkription IN und AUS dem Pharma for You Programm — Kundenbindung an die Apotheke</li>
+                    <li><span class="material-icons">check_circle</span> Funnel-Know-how — Online-Marketing-Denkweise, die Apotheken nicht haben</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PLAUDER PUDEL SOLUTION -->
+<section id="solution">
+    <div class="container">
+        <div class="pudel-hero fade-up">
+            <div class="section-label" style="justify-content: center">Die Lösung</div>
+            <div class="pudel-name">PLAUDER PUDEL</div>
+            <p class="pudel-tagline">Das KI-Analysetool für die <strong>Apotheke 2.0</strong></p>
+            <hr class="glow-divider">
+            <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto; font-size: 1rem; line-height: 1.7;">
+                Ein einfaches 15-Fragen-Gespräch. Strukturierte Daten. Ready für Pharma for You. 
+                DSGVO-konform auf lokaler Hardware. Der Schlüssel zur PDL-Monetarisierung.
+            </p>
+        </div>
+
+        <div class="pillar-grid">
+            <div class="pillar fade-up">
+                <div class="step">1</div>
+                <h4>Daten sammeln</h4>
+                <p>15-Fragen Brownback-Gespräch. KI-Voice-Agent transkribiert und strukturiert automatisch alle Medikationsdaten.</p>
+            </div>
+            <div class="pillar fade-up">
+                <div class="step">2</div>
+                <h4>Daten strukturieren</h4>
+                <p>Lokales LLM verarbeitet DSGVO-konform. Output: Pharma-for-You-kompatible Datenstruktur in 48 Stunden.</p>
+            </div>
+            <div class="pillar fade-up">
+                <div class="step">3</div>
+                <h4>PDL monetarisieren</h4>
+                <p>90€ pro Polymedikations-Beratung. Automatische Abrechnung. Affiliate-Upselling. Die Apotheke verdient.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- UMSATZ FUNNEL -->
+<section id="funnel">
+    <div class="container">
+        <div class="section-label">Der Funnel</div>
+        <h2 class="section-title fade-up" style="text-align: center">Multiplikation<br>statt <span style="color: var(--text-muted); text-decoration: line-through">Addition.</span></h2>
+        <p class="section-desc fade-up" style="text-align: center; margin: 0 auto">Von Laufkundschaft zum bezahlten Beratungstermin — automatisiert durch KI.</p>
+
+        <div class="funnel-steps">
+            <div class="funnel-step fade-up">
+                <div class="num">01</div>
+                <div>
+                    <h4>Laufkundschaft</h4>
+                    <p>1000+ Kontakte/Tag — KI-Voice Agent qualifiziert automatisch</p>
+                </div>
+            </div>
+            <div class="funnel-step fade-up">
+                <div class="num">02</div>
+                <div>
+                    <h4>Terminpatienten</h4>
+                    <p>Automatische PDL-Terminierung</p>
+                    <div class="revenue">30% Conversion</div>
+                </div>
+            </div>
+            <div class="funnel-step fade-up">
+                <div class="num">03</div>
+                <div>
+                    <h4>PDL-Beratung</h4>
+                    <p>10 PDLs/Tag = Grundumsatz durch Beratung</p>
+                    <div class="revenue">90€ pro Beratung</div>
+                </div>
+            </div>
+            <div class="funnel-step fade-up">
+                <div class="num">04</div>
+                <div>
+                    <h4>Upselling & Abo-Modell</h4>
+                    <p>Abnehmprogramm (Oviva), Vitamine/NEM, Hautanalyse-Abo, Rauchentwöhnung</p>
+                    <div class="revenue">+300% Zusatzumsatz</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TURNAROUND TIMELINE -->
+<section id="turnaround">
+    <div class="container">
+        <div class="section-label">Die Turnaround Story</div>
+        <h2 class="section-title fade-up">Von der Krise<br>zum <span style="color: var(--teal-400)">Champion.</span></h2>
+
+        <div class="timeline">
+            <div class="timeline-card danger fade-up">
+                <div class="phase">HEUTE</div>
+                <h4>Die Krise</h4>
+                <ul>
+                    <li>4,3% Gewinnmarge</li>
+                    <li>70% Zeit für Bürokratie</li>
+                    <li>Personalfluktuation hoch</li>
+                    <li>Existenzangst</li>
+                </ul>
+            </div>
+            <div class="timeline-card fade-up">
+                <div class="phase">MONAT 1–3</div>
+                <h4>Die Wende</h4>
+                <ul>
+                    <li>Agentifizierung startet</li>
+                    <li>-50% Admin-Aufwand</li>
+                    <li>Erste PDL-Erfolge</li>
+                    <li>Team wird entlastet</li>
+                </ul>
+            </div>
+            <div class="timeline-card fade-up">
+                <div class="phase">MONAT 6</div>
+                <h4>Momentum</h4>
+                <ul>
+                    <li>200+ PDLs/Monat</li>
+                    <li>Affiliate-Einnahmen fließen</li>
+                    <li>24/7 Erreichbarkeit</li>
+                    <li>Kundenbindung steigt</li>
+                </ul>
+            </div>
+            <div class="timeline-card fade-up">
+                <div class="phase">JAHR 1</div>
+                <h4>Der Champion</h4>
+                <ul>
+                    <li>15%+ Gewinnmarge</li>
+                    <li>Marktführer lokal</li>
+                    <li>Expansion möglich</li>
+                    <li>Team motiviert</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="compare fade-up">
+            <div class="compare-card old">
+                <span class="emoji">😰</span>
+                <h4>Weitermachen wie bisher</h4>
+                <p>Schließung in 2 Jahren. Mitarbeiter entlassen. Versorgungslücken.</p>
+            </div>
+            <div class="compare-card new">
+                <span class="emoji">🚀</span>
+                <h4>Agentifizierung starten</h4>
+                <p>Von 148.000€ auf 215.000€ Betriebsergebnis. Marktführer werden.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+    <div class="container">
+        <div class="cta-box fade-up">
+            <div class="section-label" style="justify-content: center">Bereit?</div>
+            <h2 class="cta-title">Wer jetzt nicht handelt,<br>ist in 2 Jahren weg.</h2>
+            <p class="cta-desc">Die Lösung ist da. Plugin & Use. Das Window of Opportunity schließt sich.</p>
+            <a href="mailto:gorden@agentifizierung.de" class="cta-btn">
+                <span class="material-icons">rocket_launch</span>
+                Jetzt Demo vereinbaren
+            </a>
+            <div class="cta-meta">
+                PLAUDER PUDEL × medikationsberatung.ai × agentifizierung.de • 2026
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>agentifizierung.de • PLAUDER PUDEL • medikationsberatung.ai • © 2026</p>
+</footer>
+
+<script>
+// Intersection Observer for fade-up animations
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Counter animation
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseInt(el.dataset.target);
+            let current = 0;
+            const increment = target / 60;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    el.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(current);
+                }
+            }, 25);
+            counterObserver.unobserve(el);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+</script>
+
+</body>
+</html>
